@@ -1,3 +1,12 @@
+---
+title: Sentinel AI Fraud Detection
+emoji: 🛡️
+colorFrom: red
+colorTo: blue
+sdk: docker
+pinned: false
+---
+
 # 🛡️ Sentinel AI — Advanced Fraud Detection System
 
 Sentinel AI is a premium, enterprise-grade fraud detection and risk scoring platform. It leverages machine learning to identify fraudulent transactions in real-time, providing deep behavioral insights and predictive analytics through a modern executive dashboard.
