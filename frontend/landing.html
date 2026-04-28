@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel AI | Rudkryson Tech</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: radial-gradient(circle at top right, #1e293b, #020617);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .hero {
+            max-width: 900px;
+            margin-top: -5vh;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+        }
+        .btn-outline {
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        .dashboard-preview {
+            margin-top: 5rem;
+            width: 100%;
+            max-width: 1100px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            opacity: 0.8;
+            transition: opacity 0.5s;
+        }
+        .dashboard-preview:hover { opacity: 1; }
+        
+        .nav-top {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            right: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-top">
+        <div class="logo">
+            <span class="logo-icon">🛡️</span>
+            <span class="logo-text">SENTINEL AI</span>
+        </div>
+        <a href="login.html" class="btn-outline" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Sign In</a>
+    </nav>
+
+    <div class="hero">
+        <p style="color: var(--primary); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem;">Powered by Rudkryson Tech</p>
+        <h1>Sentinel AI Fraud Intelligence</h1>
+        <p>Enterprise-grade real-time transaction monitoring and anomaly detection for the modern financial landscape.</p>
+        <div class="cta-group">
+            <a href="login.html" class="btn-primary">Start Monitoring</a>
+            <a href="#features" class="btn-outline">Watch Demo</a>
+        </div>
+    </div>
+
+    <div class="dashboard-preview">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000" alt="Dashboard Preview" style="width: 100%; display: block;">
+    </div>
+
+    <script>
+        // Auto-redirect if already logged in
+        if (localStorage.getItem('sentinel_token')) {
+            window.location.href = 'index.html';
+        }
+    </script>
+    <footer style="margin-top: 5rem; color: var(--text-dim); font-size: 0.85rem; padding-bottom: 2rem;">
+        &copy; 2026 Rudkryson Tech. All rights reserved. Sentinel AI v1.0
+    </footer>
+</body>
+</html>

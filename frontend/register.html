@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel AI | Security Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --card-bg: #141c2f;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --text: #ffffff;
+            --text-dim: #94a3b8;
+            --border: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 450px;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            position: relative;
+            z-index: 10;
+        }
+
+        .header { text-align: center; margin-bottom: 2.5rem; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+        .header p { color: var(--text-dim); font-size: 0.95rem; }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--text-dim); }
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+        }
+        .login-btn:hover { background: var(--primary-hover); }
+        .login-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+        .footer-links { text-align: center; margin-top: 2rem; font-size: 0.85rem; color: var(--text-dim); }
+        .footer-links a { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+        .bg-circles {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+        }
+        .c1 { width: 400px; height: 400px; background: var(--primary); top: -100px; right: -100px; }
+        .c2 { width: 300px; height: 300px; background: #6366f1; bottom: -50px; left: -50px; }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            display: none;
+        }
+        .alert-error { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #ef4444; }
+        .alert-success { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; color: #22c55e; }
+    </style>
+</head>
+<body>
+    <div class="bg-circles">
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
+    </div>
+
+    <div class="login-card">
+        <div class="header">
+            <div class="logo">SENTINEL AI</div>
+            <p>Access Initialization</p>
+        </div>
+
+        <div id="alert" class="alert"></div>
+
+        <form id="register-form">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="fullname" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label>Corporate Email</label>
+                <input type="email" id="email" placeholder="name@rudkryson.com" required>
+            </div>
+            <div class="form-group">
+                <label>Security Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="login-btn" id="submit-btn">Create Secure Account</button>
+        </form>
+
+        <div class="footer-links">
+            Already have an account? <a href="login.html">Sign In</a>
+        </div>
+    </div>
+
+    <script>
+        if (localStorage.getItem('sentinel_token')) {
+            window.location.href = 'index.html';
+        }
+        const form = document.getElementById('register-form');
+        const btn = document.getElementById('submit-btn');
+        const alertBox = document.getElementById('alert');
+
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+            alertBox.style.display = 'none';
+
+            const payload = {
+                full_name: document.getElementById('fullname').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alertBox.className = 'alert alert-success';
+                    alertBox.textContent = 'Account created successfully! Redirecting...';
+                    alertBox.style.display = 'block';
+                    setTimeout(() => window.location.href = 'login.html', 2000);
+                } else {
+                    alertBox.className = 'alert alert-error';
+                    alertBox.textContent = data.detail || 'Registration failed';
+                    alertBox.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'Create Secure Account';
+                }
+            } catch (err) {
+                alertBox.className = 'alert alert-error';
+                alertBox.textContent = 'Connection error. Please check your backend.';
+                alertBox.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Create Secure Account';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "trained_at": "2026-04-23T15:20:43.668534Z",
+  "model_name": "Random Forest (Tuned)",
+  "threshold": 0.4,
+  "feature_names": [
+    "amount",
+    "transaction_hour",
+    "transaction_day",
+    "transaction_freq_7d",
+    "avg_amount_7d",
+    "amount_deviation",
+    "is_night",
+    "is_weekend",
+    "location_international",
+    "location_online",
+    "location_rural",
+    "location_suburban",
+    "location_urban",
+    "transaction_type_atm",
+    "transaction_type_contactless",
+    "transaction_type_online",
+    "transaction_type_pos",
+    "transaction_type_wire_transfer"
+  ],
+  "metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "avg_precision": 1.0
+  }
+}

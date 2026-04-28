@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel AI | Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dark-theme">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">SENTINEL AI</span>
+            </div>
+            <p class="brand-sub">FRAUD INTELLIGENCE</p>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active" data-page="dashboard">
+                    <span class="nav-icon">📊</span> Dashboard
+                </li>
+                <li data-page="analysis">
+                    <span class="nav-icon">🔍</span> Transaction Analysis
+                </li>
+                <li data-page="alerts">
+                    <span class="nav-icon">⚠️</span> Alerts <span class="badge" id="alert-badge">5</span>
+                </li>
+                <li data-page="analytics">
+                    <span class="nav-icon">📈</span> Analytics
+                </li>
+                <li data-page="batch">
+                    <span class="nav-icon">📂</span> Batch Processing
+                </li>
+                <li data-page="settings">
+                    <span class="nav-icon">⚙️</span> Settings
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar">AS</div>
+                <div class="user-info">
+                    <p class="user-name">Atiullah Salim</p>
+                    <p class="user-role">System Admin</p>
+                </div>
+            </div>
+            <button class="logout-btn">🚪 Logout</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content-area">
+        <header class="top-header">
+            <h1 id="page-title">Intelligence Dashboard</h1>
+            <div class="header-actions">
+                <div class="system-status">
+                    <span class="status-dot online"></span> System Online
+                </div>
+                <div class="last-sync">Last updated: <span id="sync-time">Just now</span></div>
+            </div>
+        </header>
+
+        <div id="page-container">
+            <!-- Content will be injected here via JS -->
+            <div class="loader-container" id="global-loader">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>Powered by Rudkryson Tech | Sentinel AI Fraud Detection v1.0</p>
+    </footer>
+
+    <!-- Overlay for Modals/Toasts -->
+    <div id="toast-container"></div>
+
+    <script src="js/app.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel AI | Secure Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: var(--bg-deep);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .login-card {
+            background: var(--bg-surface);
+            width: 100%;
+            max-width: 450px;
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--card-shadow);
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .login-header .logo {
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .login-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .login-header p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .login-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+        .login-btn:hover {
+            background: #2563eb;
+            transform: scale(1.02);
+        }
+        .login-footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            padding: 0.75rem;
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 8px;
+            color: var(--success);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <a href="landing.html" style="position: absolute; top: 2rem; left: 2rem; text-decoration: none; color: var(--text-dim); display: flex; align-items: center; gap: 0.5rem; font-weight: 500;">
+        <span>←</span> Back to Home
+    </a>
+    <div class="login-card">
+        <div class="login-header">
+            <a href="landing.html" style="text-decoration: none;">
+                <div class="logo">
+                    <span class="logo-icon">🛡️</span>
+                    <span class="logo-text">SENTINEL AI</span>
+                </div>
+            </a>
+            <h2>Secure Access</h2>
+            <p>Authorized Personnel Only</p>
+        </div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label>Corporate Email</label>
+                <input type="email" id="email" placeholder="name@rudkryson.com" required style="width: 100%;">
+            </div>
+            <div class="form-group">
+                <label>Security Password</label>
+                <input type="password" id="password" placeholder="••••••••" required style="width: 100%;">
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; cursor: pointer;">
+                    <input type="checkbox"> Remember device
+                </label>
+                <a href="#" style="color: var(--primary); font-size: 0.85rem; text-decoration: none;">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="login-btn" id="login-btn">Initialize Session</button>
+        </form>
+
+        <script>
+            document.getElementById('login-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('login-btn');
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                btn.textContent = 'Authenticating...';
+                btn.disabled = true;
+
+                const formData = new FormData();
+                formData.append('username', email);
+                formData.append('password', password);
+
+                try {
+                    const response = await fetch('/api/auth/login', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        localStorage.setItem('sentinel_token', data.access_token);
+                        localStorage.setItem('user_email', email);
+                        window.location.href = 'index.html';
+                    } else {
+                        const err = await response.json();
+                        alert('Login Failed: ' + (err.detail || 'Invalid credentials'));
+                    }
+                } catch (err) {
+                    alert('Connection Error: ' + err.message);
+                } finally {
+                    btn.textContent = 'Initialize Session';
+                    btn.disabled = false;
+                }
+            });
+        </script>
+
+        <div class="security-note">
+            <span>🔒</span> End-to-End Encrypted Authentication
+        </div>
+
+        <div class="login-footer">
+            <p style="margin-bottom: 1rem;">Don't have an account? <a href="register.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Register Now</a></p>
+            <p>Developed under the guidance of Rudkryson Tech</p>
+            <a href="landing.html" style="color: var(--primary); display: inline-block; margin-top: 1rem; text-decoration: none; font-weight: 600;">← Back to Home Page</a>
+        </div>
+    </div>
+    <script>
+        if (localStorage.getItem('sentinel_token')) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
