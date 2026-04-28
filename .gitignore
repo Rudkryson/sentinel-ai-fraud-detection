@@ -15,9 +15,9 @@ htmlcov/
 # Model Artifacts
 *.joblib
 *.pkl
-models/
-pipelines/
-visualisations/
+model/
+pipeline/
+visualizations/
 
 # Logs
 logs/
